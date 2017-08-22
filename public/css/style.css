@@ -1,0 +1,30 @@
+body{
+    background-color: #3c3c3c;
+}
+
+.lookupBtn{
+    padding: 1em;
+    margin: 1em 0em 0em 40em;
+}
+
+.customTxt{
+    font-family: sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 1em 0em 0em 0em;
+}
+.titleText{
+    background-color: #0f0f0f;
+}
+
+.lookUpLists{
+    padding: 1em;
+    text-space: 1em;
+}
+.lookUpLists li{
+    padding: 0.5em;
+}
+
+.headerTitle{
+    background-color: #222222;
+}

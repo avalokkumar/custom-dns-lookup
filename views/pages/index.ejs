@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <link rel="css/stylesheet" href="./lib/css/bootstrap.min.css">-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
+    <title>DNS Resolver</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row headerTitle">
+        <h2 class="text-center text-muted">DNS LOOKUP SERVICE</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <h3 class="well titleText col-md-4 text-danger">Your IP Address is : <%= currIPAddr%></h3>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <form action="resolvehostname" accept-charset="utf-8" method="post" target="_self">
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6 text-primary text-center customTxt"><span>Enter Domain Name (Each in new line)</span><br>
+                        <input type="text" name="domainName" placeholder="domain name..." class="form-control well"></input>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+                <input type="submit" class="btn btn-danger center-block lookupBtn" value="Click to lookup hostname(s)"></input>
+            </form>
+            <div class="row">
+                <h3 class="text-center text-warning">IP Address corresponding to Domain Name(s)</h3>
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="well">
+                        <ul class="list-group lookUpLists">
+                            <%
+                                for(var i=hostnames.length-1; i >= 0; i-- ){
+                                    if(hostnames[i].error){
+                            %>
+                                <strong><li class="list-group-item-danger">Hostname : <%= hostnames[i].error.message%></li></strong>
+                                <li class="list-group-item-danger well" style="list-style: none"></li>
+                            <%
+                                }else{
+                            %>
+                                <li class="list-group-item-info"><strong>Hostname :</strong> <%= hostnames[i].ipAddress%></li>
+                                <li class="list-group-item-danger well" style="list-style: none"></span><span class="p"><strong>Domain Name :</strong> </span> <%= hostnames[i].domainName%></li>
+                            <%
+                               }
+                              }
+                            %>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../lib/js/jquery-3.2.1.min.js"></script>
+<script src="../../lib/js/tether.min.js"></script>
+<script src="../../lib/js/bootstrap.min.js"></script>
+</body>
+</html>
