@@ -1,13 +1,13 @@
 var services = {};
 const dnsSync = require('dns-sync'),
     dns = require('dns'),
-    flash = require('connect-flash'),
     fs = require('fs'),
     validationService = require('./validation-service'),
     hostnames = JSON.parse(fs.readFileSync('./hostnames.json')),
     os = require('os');
 
-const netInterfaces = os.networkInterfaces();
+const netInterfaces = os.networkInterfaces(),
+      INVALID_DOMAIN_NAME = "Invalid Doman Name";
 
 services.name = function (req, res) {
     res.json({
@@ -40,16 +40,18 @@ services.getCurrentIPAddress = function () {
     return systemIp;
 }
 
-updateIPV4 = function (hostnames, ipAddress, domainName) {
+updateIPV4 = function (hostnames, ipAddresses, domainName) {
     var currentCount = hostnames[hostnames.length-1].id;
-    hostnames.push({id: ++currentCount, ipAddress: ipAddress, domainName: domainName});
+    console.log('Inside updateIPV4 : ')
+    console.log(ipAddresses);
+    hostnames.push({id: ++currentCount, ipAddresses: ipAddresses, domainName: domainName});
     fs.writeFileSync('./hostnames.json', JSON.stringify({data: hostnames}), 'utf8');
 }
 
 updateErrorMessage = function (hostnames) {
     hostnames.push({error: {
                         code: 400,
-                        message: 'Invalid IP Address Provided'
+                        message: 'Invalid Domain Name Provided'
                         }
                     });
 
@@ -61,20 +63,27 @@ resolveIPAddrtoDomainName = function (ipAddr) {
     return '';
 }
 
+function resolveDomainNameToIPAddress(domainName, getIpAddressCallback) {
+    /*var ipAddresses = [];*/
+    dns.resolve4(domainName, function (err, addresses) {
+        if(err){
+            getIpAddressCallback(INVALID_DOMAIN_NAME);
+            return;
+        }
+        console.log(JSON.stringify(addresses));
+        addresses.forEach(function (result) {
+            getIpAddressCallback(result);
+        });
+    });
+}
+
 services.resolveByHostname = function (req, res) {
     var hostnames = JSON.parse(fs.readFileSync('./hostnames.json')).data;
     var domainName = req.body.domainName;
     //TODO: find domain name
-    var ipAddress = resolveIPAddrtoDomainName(domainName);
-
-    if(validationService.domainName(domainName)) {
-        updateIPV4(hostnames, ipAddress, domainName)
-    }else{
-        updateErrorMessage(hostnames)
-    }
-
-    //req.flash('hostNames', hostNames);
-    console.log(domainName);
-    res.redirect('/');
+    resolveDomainNameToIPAddress(domainName, function (result) {
+        validationService.validateDomainName(domainName)?updateIPV4(hostnames, result, domainName):updateErrorMessage(hostnames);
+        res.redirect('/');
+    });
 };
 module.exports = services;

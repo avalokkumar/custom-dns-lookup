@@ -22,7 +22,7 @@
             <form action="resolvehostname" accept-charset="utf-8" method="post" target="_self">
                 <div class="row">
                     <div class="col-md-3"></div>
-                    <div class="col-md-6 text-primary text-center customTxt"><span>Enter Domain Name (Each in new line)</span><br>
+                    <div class="col-md-6 text-primary text-center customTxt"><span>Enter Domain Name</span><br>
                         <input type="text" name="domainName" placeholder="domain name..." class="form-control well"></input>
                     </div>
                     <div class="col-md-3"></div>
@@ -39,13 +39,13 @@
                                 for(var i=hostnames.length-1; i >= 0; i-- ){
                                     if(hostnames[i].error){
                             %>
-                                <strong><li class="list-group-item-danger">Hostname : <%= hostnames[i].error.message%></li></strong>
+                                <strong><li class="list-group-item-danger" style="list-style: none"><%= hostnames[i].error.message%></li></strong>
                                 <li class="list-group-item-danger well" style="list-style: none"></li>
                             <%
                                 }else{
                             %>
-                                <li class="list-group-item-info"><strong>Hostname :</strong> <%= hostnames[i].ipAddress%></li>
-                                <li class="list-group-item-danger well" style="list-style: none"></span><span class="p"><strong>Domain Name :</strong> </span> <%= hostnames[i].domainName%></li>
+                                <li class="list-group-item-info"><strong>Domain Name :</strong> <%= hostnames[i].domainName%></li>
+                                <li class="list-group-item-danger well" style="list-style: none"></span><span class="p"><strong>IP Address :</strong> </span> <%= hostnames[i].ipAddresses%></li>
                             <%
                                }
                               }

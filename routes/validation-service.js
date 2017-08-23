@@ -10,8 +10,13 @@ validationServices.validateIPV4 = function (ipAddr) {
     }
 }
 
-validationServices.domainName = function (domainName) {
-
-    return true;
+validationServices.validateDomainName = function (domainName) {
+    //TODO: validate domain name
+    if (/^[a-zA-Z0-9][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9]{0,1}\.([a-zA-Z]{1,6}|[a-zA-Z0-9-]{1,30}\.[a-zA-Z]{2,3})$/.test(domainName)) {
+        console.log('VALID IP ADDRESS')
+        return true
+    }else{
+        return false
+    }
 }
 module.exports = validationServices;
