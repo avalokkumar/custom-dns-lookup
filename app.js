@@ -41,6 +41,7 @@ var env = process.env.NODE_ENV || 'development';
 app.get('/api/name', api.name);
 // serve index and view partials
 app.get('/', index);
+app.get('/reversedns', api.reverseDNSLookup);
 app.post('/resolvehostname', api.resolveByHostname);
 
 

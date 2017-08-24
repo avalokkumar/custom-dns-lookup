@@ -28,3 +28,13 @@ body{
 .headerTitle{
     background-color: #222222;
 }
+
+.lookupSwitchBtn{
+    margin-top: 1em;
+}
+
+.clearBtn{
+    width: 6em;
+    float: right;
+    margin: 0.2em 2.5em 0em 0em;
+}

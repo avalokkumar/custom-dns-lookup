@@ -5,14 +5,14 @@
     <!-- <link rel="css/stylesheet" href="./lib/css/bootstrap.min.css">-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
-    <title><%= title%></title>
+    <title><% title%></title>
 </head>
 <body>
 <div class="container-fluid">
     <div class="row headerTitle">
-        <div class="col-md-4"><input class="btn btn-default text-muted lookupSwitchBtn" type="button" value="Switch to Reverse DNS Lookup"></div>
-        <h2 class="col-md-4 text-center text-muted">DNS LOOKUP SERVICE</h2>
-        <div class="col-md-4"></div>
+        <div class="col-md-3"><input class="btn btn-default text-muted lookupSwitchBtn" type="button" value="Switch to DNS Lookup" onclick=""></div>
+        <h2 class="text-center text-muted col-md-6">REVERSE DNS LOOKUP SERVICE</h2>
+        <div class="col-md-3"></div>
     </div>
     <div class="row">
         <div class="col-md-3"></div>
@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-6 text-primary text-center customTxt"><span>Enter Domain Name</span><br>
-                        <input type="text" name="ipAddress" placeholder="IP Address..." class="form-control well"></input>
+                        <input type="text" name="domainName" placeholder="domain name..." class="form-control well"></input>
                     </div>
                     <div class="col-md-3"></div>
                 </div>
@@ -35,24 +35,22 @@
                 <h3 class="text-center text-warning">IP Address corresponding to Domain Name(s)</h3>
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
-                    <button class="btn btn-warning clearBtn text-center">Clear</button>
                     <div class="well">
                         <ul class="list-group lookUpLists">
-                                <li class="list-unstyled"></li>
                             <%
-                                for(var i=hostnames.length-1; i >= 0; i-- ){
-                                    if(hostnames[i].error){
+                            for(var i=hostnames.length-1; i >= 0; i-- ){
+                            if(hostnames[i].error){
                             %>
-                                <strong><li class="list-group-item-danger list-unstyled"><%= hostnames[i].error.message%></li></strong>
-                                <li class="list-group-item-danger well" ></li>
+                            <strong><li class="list-group-item-danger" style="list-style: none"><%= hostnames[i].error.message%></li></strong>
+                            <li class="list-group-item-danger well" style="list-style: none"></li>
                             <%
-                                }else{
+                            }else{
                             %>
-                                <li class="list-group-item-info list-unstyled"><strong>IP Address :</strong> <%= hostnames[i].ipAddresses%></li>
-                                <li class="list-group-item-danger well list-unstyled"></span><span class="p"><strong>Domain Name :</strong> </span> <%= hostnames[i].domainName%></li>
+                            <li class="list-group-item-info"><strong>Domain Name :</strong> <%= hostnames[i].domainName%></li>
+                            <li class="list-group-item-danger well" style="list-style: none"></span><span class="p"><strong>IP Address :</strong> </span> <%= hostnames[i].ipAddresses%></li>
                             <%
-                               }
-                              }
+                            }
+                            }
                             %>
                         </ul>
                     </div>

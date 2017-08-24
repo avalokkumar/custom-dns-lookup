@@ -86,4 +86,10 @@ services.resolveByHostname = function (req, res) {
         res.redirect('/');
     });
 };
+
+services.reverseDNSLookup = function (req, res, next) {
+    console.log('Calling Reverse DNS Lookup Service');
+    res.render('pages/reverse-lookup', {title: 'Reverse DNS Lookup', currIPAddr: services.getCurrentIPAddress(), hostnames: {}});
+}
+
 module.exports = services;

@@ -8,9 +8,12 @@ router.get('/', function(req, res, next) {
     console.log('Calling getCurrentIPAddress');
     var hostnames = JSON.parse(fs.readFileSync('./hostnames.json'));
     var currentIPAddr = apiRef.getCurrentIPAddress();
-    res.render('pages/index', { title: 'Express', currIPAddr: currentIPAddr, hostnames: hostnames.data});
+    res.render('pages/index', { title: 'DNS Lookup', currIPAddr: currentIPAddr, hostnames: hostnames.data});
 });
 
+router.get('/', function (req, res, next) {
+
+})
 
 /*
 router.post('/resolvehostname', function (req, res, next){
