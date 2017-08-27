@@ -21,15 +21,15 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <form action="resolvehostname" accept-charset="utf-8" method="post" target="_self">
+            <form action="reversedns" accept-charset="utf-8" method="post" target="_self">
                 <div class="row">
                     <div class="col-md-3"></div>
-                    <div class="col-md-6 text-primary text-center customTxt"><span>Enter Domain Name</span><br>
-                        <input type="text" name="domainName" placeholder="domain name..." class="form-control well"></input>
+                    <div class="col-md-6 text-primary text-center customTxt"><span>Enter IP Address</span><br>
+                        <input type="text" name="ipAddress" placeholder="IP address..." class="form-control well"></input>
                     </div>
                     <div class="col-md-3"></div>
                 </div>
-                <input type="submit" class="btn btn-danger center-block lookupBtn" value="Click to lookup hostname(s)"></input>
+                <input type="submit" class="btn btn-danger center-block lookupBtn" value="Click to lookup ip address"></input>
             </form>
             <div class="row">
                 <h3 class="text-center text-warning">IP Address corresponding to Domain Name(s)</h3>
@@ -47,7 +47,7 @@
                             }else{
                             %>
                             <li class="list-group-item-info"><strong>Domain Name :</strong> <%= hostnames[i].domainName%></li>
-                            <li class="list-group-item-danger well" style="list-style: none"></span><span class="p"><strong>IP Address :</strong> </span> <%= hostnames[i].ipAddresses%></li>
+                            <li class="list-group-item-danger well" style="list-style: none"></span><span class="p"><strong>IP Address :</strong> </span> <%= hostnames[i].ipAddress%></li>
                             <%
                             }
                             }
