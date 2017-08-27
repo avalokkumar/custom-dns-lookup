@@ -2,8 +2,8 @@ var services = {},
     dns = require('dns'),
     os = require('os');
 
-const INVALID_DOMAIN_NAME = "Invalid Domain Name";
-const INVALID_IP_ADDRESS = "Invalid IP Address";
+const INVALID_DOMAIN_NAME = "Invalid Domain Name Provided";
+const INVALID_IP_ADDRESS = "Invalid IP Address Provided";
 const netInterfaces = os.networkInterfaces();
 
 
